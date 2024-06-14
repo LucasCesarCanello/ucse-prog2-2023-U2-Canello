@@ -1,25 +1,6 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id("me.champeau.jmh") version "0.7.2"
-}
-
-jacoco {
-    toolVersion = "0.8.7"
-}
-
-jacocoTestReport {
-    reports {
-        xml.required
-        html.required
-        csv.required
-    }
-    dependsOn test
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
 }
 
 group 'org.example'
@@ -27,23 +8,41 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
-
 dependencies {
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation(platform('org.junit:junit-bom:5.10.2'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testRuntimeOnly('org.junit.platform:junit-platform-launcher')
     testImplementation 'org.mockito:mockito-core:4.2.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testRuntimeOnly 'org.mockito:mockito-core:4.2.0'
     implementation 'org.openjdk.jmh:jmh-core:1.33'
     annotationProcessor 'org.openjdk.jmh:jmh-generator-annprocess:1.33'
-    jmh 'org.openjdk.jmh:jmh-core:1.33'
-    jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.33'
 }
 
 test {
-    // useJUnitPlatform() // Comment out this line for JUnit 4
-    jacoco {
-        destinationFile = file("$buildDir/jacoco/test.exec")
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
     }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+    }
+}
+
+test {
+    finalizedBy 'jacocoTestReport'
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+    reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
 }

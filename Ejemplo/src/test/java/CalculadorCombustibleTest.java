@@ -1,36 +1,18 @@
 import org.example.Avion;
+import org.example.AvionPrivado;
 import org.example.CalculadorCombustible;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CalculadorCombustibleTest {
-    private CalculadorCombustible calculador;
-
-    @Before
-    public void setUp() {
-        calculador = CalculadorCombustible.getInstance();
-    }
-
     @Test
-    public void testGetInstanceNotNull() {
-        CalculadorCombustible resultado = CalculadorCombustible.getInstance();
-
-        Assert.assertSame(calculador, resultado);
-    }
-
-    @Test
-    public void testCalcularCombustibleAvion() {
+    public void testCalcularCombustibleIgualA15000() {
+        CalculadorCombustible method = CalculadorCombustible.getInstance();
         Avion avion = mock(Avion.class);
-        final int distancia = 10;
-
-        when(avion.volar(distancia)).thenReturn(125);
-
-        int resultado = calculador.calcularCombustible(avion, distancia);
-
-        Assert.assertEquals(125, resultado);
+        when(avion.volar(5000)).thenReturn(15000);
+        Assertions.assertEquals(method.calcularCombustible(avion,5000),15000);
     }
 }

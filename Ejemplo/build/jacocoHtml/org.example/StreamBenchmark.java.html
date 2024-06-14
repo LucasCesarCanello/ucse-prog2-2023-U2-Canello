@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StreamBenchmark.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Ejemplo</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">StreamBenchmark.java</span></div><h1>StreamBenchmark.java</h1><pre class="source lang-java linenums">package org.example;
+
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
+@State(Scope.Benchmark)
+<span class="nc" id="L18">public class StreamBenchmark {</span>
+    private List&lt;Integer&gt; list;
+
+    @Setup
+    public void setup() {
+<span class="nc" id="L23">        list = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L24">        Random random = new Random();</span>
+<span class="nc" id="L25">        int size = 10000000;</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        for (int i = 0; i &lt; size; i++) {</span>
+<span class="nc" id="L27">            list.add(random.nextInt(1, 50000));</span>
+        }
+<span class="nc" id="L29">    }</span>
+
+    @Benchmark
+    public void concurrencia() {
+<span class="nc" id="L33">        List&lt;Integer&gt; resultSecuencial = list.stream()</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">                .filter(n -&gt; n % 2 == 0)</span>
+<span class="nc" id="L35">                .collect(Collectors.toList());</span>
+<span class="nc" id="L36">    }</span>
+
+    @Benchmark
+    public void paralelismo() {
+<span class="nc" id="L40">        List&lt;Integer&gt; resultParalelo = list.parallelStream()</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">                .filter(n -&gt; n % 2 == 0)</span>
+<span class="nc" id="L42">                .collect(Collectors.toList());</span>
+<span class="nc" id="L43">    }</span>
+
+    public static void main(String[] args) throws RunnerException {
+<span class="nc" id="L46">        Options opt = new OptionsBuilder()</span>
+<span class="nc" id="L47">                .include(StreamBenchmark.class.getSimpleName())</span>
+<span class="nc" id="L48">                .warmupIterations(3)</span>
+<span class="nc" id="L49">                .measurementIterations(5)</span>
+<span class="nc" id="L50">                .forks(1)</span>
+<span class="nc" id="L51">                .build();</span>
+
+<span class="nc" id="L53">        new Runner(opt).run();</span>
+<span class="nc" id="L54">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -13,5 +13,8 @@
         <module name="Ejemplo.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Ejemplo.jmh" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
