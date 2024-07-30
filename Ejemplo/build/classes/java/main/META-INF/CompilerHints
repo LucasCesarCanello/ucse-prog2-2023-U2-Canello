@@ -6,3 +6,6 @@ dontinline,*.*_thrpt_jmhStub
 inline,org/example/StreamBenchmark.concurrencia
 inline,org/example/StreamBenchmark.paralelismo
 inline,org/example/StreamBenchmark.setup
+inline,org/example/StreamBenchmarkNoJIT.concurrencia
+inline,org/example/StreamBenchmarkNoJIT.paralelismo
+inline,org/example/StreamBenchmarkNoJIT.setup
