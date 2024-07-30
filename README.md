@@ -55,6 +55,8 @@ pequeñas cantidades de datos o tareas simples.
 - \[2]: https://www.jetbrains.com/guide/java/tutorials/reading-code/formatting/#:~:text=If%20we%20encounter%20code%20that,L%20(Windows%2FLinux).
 
 ## CORRECCIONES
+
+
 EJERCICIO 2:
 ![image](https://github.com/user-attachments/assets/bf0259fd-ec09-4885-b108-2046c3ebab43)
 
@@ -65,3 +67,10 @@ En comparacion a la primera imagen la cual se utilizo JIT. En concurrencia hay u
 Si vemos el paralelismo, podemos observar que hay una disminución de ops/s, no es tan amplia como en concurrencia pero hay una leve diferencia y donde si se puede observar con claridad la diferencia es en la desviación.
 
 
+EJERCICIO 3:
+Se cambio .get() por .join(). en las tareas CompletableFuture.
+Razón de la corrección:
+Utilizando join():
+Aseguramos que las tareas se ejecuten en paralelo y no secuencialmente. Esto reduce el tiempo total de ejecución.
+Obtenemos los resultados de todas las tareas al mismo tiempo, en lugar de esperar cada una individualmente.
+No requiere manejar excepciones chequeadas, lo que simplifica el código y mejora su legibilidad.
