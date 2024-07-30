@@ -77,6 +77,8 @@ Razón de la corrección:
 
 Utilizando join():
 
-Aseguramos que las tareas se ejecuten en paralelo y no secuencialmente. Esto reduce el tiempo total de ejecución.
-Obtenemos los resultados de todas las tareas al mismo tiempo, en lugar de esperar cada una individualmente.
-No requiere manejar excepciones chequeadas, lo que simplifica el código y mejora su legibilidad.
+-Aseguramos que las tareas se ejecuten en paralelo y no secuencialmente. Esto reduce el tiempo total de ejecución.
+
+-Obtenemos los resultados de todas las tareas al mismo tiempo, en lugar de esperar cada una individualmente.
+
+-No requiere manejar excepciones chequeadas, lo que simplifica el código y mejora su legibilidad.
