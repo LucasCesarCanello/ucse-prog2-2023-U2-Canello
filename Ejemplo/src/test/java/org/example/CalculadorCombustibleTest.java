@@ -1,6 +1,5 @@
-import org.example.Avion;
-import org.example.AvionPrivado;
-import org.example.CalculadorCombustible;
+package org.example;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +12,6 @@ public class CalculadorCombustibleTest {
         CalculadorCombustible method = CalculadorCombustible.getInstance();
         Avion avion = mock(Avion.class);
         when(avion.volar(5000)).thenReturn(15000);
-        Assertions.assertEquals(method.calcularCombustible(avion,5000),15000);
+        Assertions.assertEquals(method.calcularCombustible(avion, 5000), 15000);
     }
 }

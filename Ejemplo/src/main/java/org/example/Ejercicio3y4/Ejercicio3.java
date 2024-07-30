@@ -24,7 +24,7 @@ public class Ejercicio3 {
                 int result3 = tarea3.get();
                 int result4 = tarea4.get();
 
-                int suma= result1 + result2 + result3 + result4;
+                int suma = result1 + result2 + result3 + result4;
 
                 System.out.println("Suma de los valores generados por las tareas: " + suma);
 
