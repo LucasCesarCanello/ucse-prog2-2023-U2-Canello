@@ -60,17 +60,23 @@ pequeñas cantidades de datos o tareas simples.
 EJERCICIO 2:
 ![image](https://github.com/user-attachments/assets/bf0259fd-ec09-4885-b108-2046c3ebab43)
 
+
 Habiendo utilizado BlackHole el cual se utiliza para prevenir las optimizaciones del compilador JIT (Just-In-Time) que podrían distorsionar los resultados de las pruebas de rendimiento. Cuando se realiza una prueba de rendimiento, el compilador JIT puede detectar y eliminar el código que no tiene efectos secundarios, lo que puede hacer que las pruebas sean más rápidas de lo que realmente serían. Blackhole consume los resultados de las operaciones para asegurarse de que no sean eliminados por el compilador JIT. Podemos notar una diferencia entre haber utilizado el compilador JIT y utilizar BlackHole ya que como se puede comparar en la imagen, utilizar el compilador Just In Time provoca que se puedan realizar mas ops/s gracias a su optimización en el código. En cambio, con BlacHole podemos notar resultados mas reales.
 El paralelismo sigue siendo superior en cuanto rendimiento a la concurrencia. Pero ha habido un cambio importante en la desviación estándar de las mediciones. Esto se puede observar a través de la columna "Error" con BlackHole podemos apreciar que Paralelismo en Score tiene aprox 11 ops/s mientras que en Error ronda el mismo valor. Con esto aclarado podemos decir que hay una gran variabilidad en las mediciones de rendimiento lo cual no es confiable.
+
 
 En comparacion a la primera imagen la cual se utilizo JIT. En concurrencia hay una gran cambio en las ops/s y en la desviación ya que mientras en la 1ra imagen ronda las 9 ops/s, en la 2da baja significativamente a 4ops/s. Además, con la utilización de BlackHole ha aumentado de manera extrema la desviación.
 Si vemos el paralelismo, podemos observar que hay una disminución de ops/s, no es tan amplia como en concurrencia pero hay una leve diferencia y donde si se puede observar con claridad la diferencia es en la desviación.
 
 
 EJERCICIO 3:
+
 Se cambio .get() por .join(). en las tareas CompletableFuture.
+
 Razón de la corrección:
+
 Utilizando join():
+
 Aseguramos que las tareas se ejecuten en paralelo y no secuencialmente. Esto reduce el tiempo total de ejecución.
 Obtenemos los resultados de todas las tareas al mismo tiempo, en lugar de esperar cada una individualmente.
 No requiere manejar excepciones chequeadas, lo que simplifica el código y mejora su legibilidad.
